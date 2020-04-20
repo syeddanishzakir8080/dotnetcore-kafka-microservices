@@ -14,4 +14,10 @@
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
   </ItemGroup>
 
+  <ItemGroup>
+      <Reference Include="KafkaEngine">
+        <HintPath>..\KafkaEngine\bin\Debug\netcoreapp2.1\KafkaEngine.dll</HintPath>
+      </Reference>
+  </ItemGroup>
+
 </Project>

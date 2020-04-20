@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Api.Models;
 using Confluent.Kafka;
+using KafkaEngine;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
@@ -35,7 +36,7 @@ namespace Api.Controllers
             Console.WriteLine(serializedOrder);
             Console.WriteLine("=========");
 
-            var producer = new ProducerWrapper(this.config,"orderrequests");
+            var producer = new ProducerWrapper<string>(this.config,"orderrequests");
             await producer.writeMessage(serializedOrder);
 
             return Created("TransactionId", "Your order is in progress");

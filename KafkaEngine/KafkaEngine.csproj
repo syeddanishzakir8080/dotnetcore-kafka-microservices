@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <PackageId>KafkaEngine</PackageId>
+    <Version>1.0.0-pre</Version>
+    <Authors>SyedDanishAli</Authors>
+    <Company>SkillOrbit</Company>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+<ItemGroup>
+    <PackageReference Include="confluent.kafka" Version="1.0-beta2" />
+  </ItemGroup>
+
+</Project>

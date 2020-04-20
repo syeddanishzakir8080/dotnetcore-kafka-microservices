@@ -1,22 +1,21 @@
-namespace Api
+namespace KafkaEngine
 {
     using Confluent.Kafka;
     using System;
     using System.Threading;
-    public class ConsumerWrapper
+    public class ConsumerWrapper<T>
     {
         private string _topicName;
         private ConsumerConfig _consumerConfig;
-        private Consumer<string,string> _consumer;
-        private static readonly Random rand = new Random();
+        private Consumer<string,T> _consumer;
         public ConsumerWrapper(ConsumerConfig config,string topicName)
         {
             this._topicName = topicName;
             this._consumerConfig = config;
-            this._consumer = new Consumer<string,string>(this._consumerConfig);
+            this._consumer = new Consumer<string,T>(this._consumerConfig);
             this._consumer.Subscribe(topicName);
         }
-        public string readMessage(){
+        public T readMessage(){
             var consumeResult = this._consumer.Consume();
             return consumeResult.Value;
         }

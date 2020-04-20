@@ -7,6 +7,7 @@ namespace Api.Services
     using Api.Models;
     using Newtonsoft.Json;
     using Confluent.Kafka;
+    using KafkaEngine;
 
     public class ProcessOrdersService : BackgroundService
     {
@@ -23,7 +24,7 @@ namespace Api.Services
             
             while (!stoppingToken.IsCancellationRequested)
             {
-                var consumerHelper = new ConsumerWrapper(consumerConfig, "orderrequests");
+                var consumerHelper = new ConsumerWrapper<string>(consumerConfig, "orderrequests");
                 string orderRequest = consumerHelper.readMessage();
 
                 //Deserilaize 
@@ -34,8 +35,7 @@ namespace Api.Services
                 order.status = OrderStatus.COMPLETED;
 
                 //Write to ReadyToShip Queue
-
-                var producerWrapper = new ProducerWrapper(producerConfig,"readytoship");
+                var producerWrapper = new ProducerWrapper<string>(producerConfig,"readytoship");
                 await producerWrapper.writeMessage(JsonConvert.SerializeObject(order));
             }
         }
